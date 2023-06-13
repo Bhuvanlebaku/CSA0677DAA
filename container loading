@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+#define MAX_CONTAINERS 8
+
+int containers[MAX_CONTAINERS] = {50, 100, 30, 80, 90, 200, 150, 20};
+int capacity = 100;
+int bestLoading[MAX_CONTAINERS];
+int bestLoadingCount = 0;
+
+void findBestLoading(int currentContainer, int currentWeight, int currentLoading[], int currentCount) {
+    if (currentContainer == MAX_CONTAINERS) {
+        if (currentCount > bestLoadingCount) {
+            bestLoadingCount = currentCount;
+            for (int i = 0; i < currentCount; i++) {
+                bestLoading[i] = currentLoading[i];
+            }
+        }
+        return;
+    }
+
+    if (currentWeight + containers[currentContainer] <= capacity) {
+        currentLoading[currentCount] = containers[currentContainer];
+        findBestLoading(currentContainer + 1, currentWeight + containers[currentContainer], currentLoading, currentCount + 1);
+    }
+
+    findBestLoading(currentContainer + 1, currentWeight, currentLoading, currentCount);
+}
+
+int main() {
+    int currentLoading[MAX_CONTAINERS];
+    findBestLoading(0, 0, currentLoading, 0);
+
+    printf("Best Loading: ");
+    for (int i = 0; i < bestLoadingCount; i++) {
+        printf("%d ", bestLoading[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
