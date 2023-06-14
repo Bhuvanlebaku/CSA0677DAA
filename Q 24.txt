@@ -1,0 +1,92 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void displayList(int arr[], int size) {
+    printf("List: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void insertAtBeginning(int arr[], int *size, int num) {
+    for (int i = *size; i > 0; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[0] = num;
+    (*size)++;
+    printf("Number %d inserted at the beginning.\n", num);
+}
+
+void insertInMiddle(int arr[], int *size, int num, int position) {
+    if (position < 0 || position >= *size) {
+        printf("Invalid position!\n");
+        return;
+    }
+
+    for (int i = *size; i > position; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[position] = num;
+    (*size)++;
+    printf("Number %d inserted at position %d.\n", num, position);
+}
+
+void insertAtLast(int arr[], int *size, int num) {
+    arr[*size] = num;
+    (*size)++;
+    printf("Number %d inserted at the last.\n", num);
+}
+
+int main() {
+    int arr[MAX_SIZE];
+    int size = 0;
+    int num, position;
+    int choice;
+
+    while (1) {
+        printf("1. Insert at the beginning\n");
+        printf("2. Insert in the middle\n");
+        printf("3. Insert at the last\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter the number to insert: ");
+                scanf("%d", &num);
+                insertAtBeginning(arr, &size, num);
+                displayList(arr, size);
+                break;
+
+            case 2:
+                printf("Enter the number to insert: ");
+                scanf("%d", &num);
+                printf("Enter the position to insert: ");
+                scanf("%d", &position);
+                insertInMiddle(arr, &size, num, position);
+                displayList(arr, size);
+                break;
+
+            case 3:
+                printf("Enter the number to insert: ");
+                scanf("%d", &num);
+                insertAtLast(arr, &size, num);
+                displayList(arr, size);
+                break;
+
+            case 4:
+                printf("Exiting program.\n");
+                return 0;
+
+            default:
+                printf("Invalid choice! Please try again.\n");
+                break;
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
