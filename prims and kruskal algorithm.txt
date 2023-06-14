@@ -1,0 +1,226 @@
+#include <stdio.h>
+#define MAX 30
+typedef struct edge {
+  int u, v, w;
+} edge;
+typedef struct edge_list {
+  edge data[MAX];
+  int n;
+} edge_list;
+edge_list elist;
+int Graph[MAX][MAX], n,count=0;
+edge_list spanlist;
+void kruskalAlgo();
+int find(int belongs[], int vertexno);
+void applyUnion(int belongs[], int c1, int c2);
+void sort();
+void print();
+void kruskalAlgo() {
+  int belongs[MAX], i, j, cno1, cno2;
+  elist.n = 0;
+count++;
+count++;
+  for (i = 1; i < n; i++)
+  count++;
+    for (j = 0; j < i; j++) {
+    	count++;
+    	count++;
+    	count++;
+    	count++;
+      if (Graph[i][j] != 0) {
+      	count++;
+        elist.data[elist.n].u = i;
+        count++;
+        elist.data[elist.n].v = j;
+        count++;
+        elist.data[elist.n].w = Graph[i][j];
+        count++;
+        elist.n++;
+        count++;
+      }
+      count++;
+    }
+  sort();
+  count++;
+  for (i = 0; i < n; i++)
+  count++;
+  count++;
+  count++;
+    belongs[i] = i;
+    count++;
+  spanlist.n = 0;
+  count++;
+  count++;
+  for (i = 0; i < elist.n; i++) {
+  	count++;
+  	count++;
+  	count++;
+    cno1 = find(belongs, elist.data[i].u);
+    count++;
+    cno2 = find(belongs, elist.data[i].v);
+    count++;
+    count++;
+    if (cno1 != cno2) {
+    	count++;
+      spanlist.data[spanlist.n] = elist.data[i];
+      count++;
+      spanlist.n = spanlist.n + 1;
+      count++;
+      applyUnion(belongs, cno1, cno2);
+      count++;
+    }
+    count++;
+  }
+}
+int find(int belongs[], int vertexno) {
+  return (belongs[vertexno]);
+}
+void applyUnion(int belongs[], int c1, int c2) {
+  int i;
+  count++;
+  count++;
+  for (i = 0; i < n; i++)
+  count++;
+  count++;
+  count++;
+  count++;
+    if (belongs[i] == c2)
+    count++;
+      belongs[i] = c1;
+      count++;
+}
+void sort() {
+  int i, j;
+  edge temp;
+  count++;
+  for (i = 1; i < elist.n; i++)
+  count++;
+    for (j = 0; j < elist.n - 1; j++)
+    count++;
+    count++;
+    count++;
+    count++;
+      if (elist.data[j].w > elist.data[j + 1].w) {
+      	count++;
+        temp = elist.data[j];
+        count++;
+        elist.data[j] = elist.data[j + 1];
+        count++;
+        elist.data[j + 1] = temp;
+        count++;
+      }
+      count++;
+}
+void print() {
+  int i, cost = 0;
+  count++;
+  count++;
+  for (i = 0; i < spanlist.n; i++) {
+  	count++;
+  	count++;
+  	count++;
+    printf("\n%d - %d : %d", spanlist.data[i].u, spanlist.data[i].v, spanlist.data[i].w);
+    count++;
+    cost = cost + spanlist.data[i].w;
+    count++;
+  }
+  count++;
+  printf("\nSpanning tree cost: %d", cost);
+  count++;
+}
+int main() {
+  int i, j, total_cost;
+  n = 6;
+  count++;
+  Graph[0][0] = 0;
+  count++;
+  Graph[0][1] = 4;
+  count++;
+  Graph[0][2] = 4;
+  count++;
+  Graph[0][3] = 0;
+  count++;
+  Graph[0][4] = 0;
+  count++;
+  Graph[0][5] = 0;
+  count++;
+  Graph[0][6] = 0;
+  count++;
+
+  Graph[1][0] = 4;
+  count++;
+  Graph[1][1] = 0;
+  count++;
+  Graph[1][2] = 2;
+  count++;
+  Graph[1][3] = 0;
+  count++;
+  Graph[1][4] = 0;
+  count++;
+  Graph[1][5] = 0;
+  count++;
+  Graph[1][6] = 0;
+  count++;
+
+  Graph[2][0] = 4;
+  count++;
+  Graph[2][1] = 2;
+  count++;
+  Graph[2][2] = 0;
+  count++;
+  Graph[2][3] = 3;
+  count++;
+  Graph[2][4] = 4;
+  count++;
+  Graph[2][5] = 0;
+  count++;
+  Graph[2][6] = 0;
+
+  Graph[3][0] = 0;
+  count++;
+  Graph[3][1] = 0;
+  count++;
+  Graph[3][2] = 3;
+  count++;
+  Graph[3][3] = 0;
+  count++;
+  Graph[3][4] = 3;
+  count++;
+  Graph[3][5] = 0;
+  count++;
+  Graph[3][6] = 0;
+  count++;
+
+  Graph[4][0] = 0;
+  count++;
+  Graph[4][1] = 0;
+  count++;
+  Graph[4][2] = 4;
+  count++;
+  Graph[4][3] = 3;
+  count++;
+  Graph[4][4] = 0;
+  count++;
+  Graph[4][5] = 0;
+  count++;
+  Graph[4][6] = 0;
+  count++;
+
+  Graph[5][0] = 0;
+  count++;
+  Graph[5][1] = 0;
+  count++;
+  Graph[5][2] = 2;
+  count++;
+  Graph[5][3] = 0;
+  count++;
+  Graph[5][4] = 3;
+  count++;
+  Graph[5][5] = 0;
+  count++;
+  Graph[5][6] = 0;
+  count++;
+  printf("%d\n",count);
+  kruskalAlgo();
+  print();
+}
